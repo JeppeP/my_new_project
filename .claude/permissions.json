@@ -1,0 +1,103 @@
+{
+  "permissions": {
+    "allow": {
+      "testing_and_validation": [
+        "Bash(npm run test:*)",
+        "Bash(npm run typecheck:*)",
+        "Bash(npm run lint:*)",
+        "Bash(npm run lint:fix:*)",
+        "Bash(bun run test:*)",
+        "Bash(bun run typecheck:*)",
+        "Bash(bun run lint:*)",
+        "Bash(bun run lint:fix:*)"
+      ],
+      "building": [
+        "Bash(npm run build:*)",
+        "Bash(npm run format:*)",
+        "Bash(bun run build:*)",
+        "Bash(bun run format:*)"
+      ],
+      "development": [
+        "Bash(npm run dev:*)",
+        "Bash(bun run dev:*)",
+        "Bash(./scripts/:*)"
+      ],
+      "git_safe": [
+        "Bash(git add:*)",
+        "Bash(git commit:*)",
+        "Bash(git diff:*)",
+        "Bash(git status:*)",
+        "Bash(git log:*)"
+      ],
+      "docker_inspect": [
+        "Bash(docker ps:*)",
+        "Bash(docker logs:*)"
+      ],
+      "file_operations": [
+        "Bash(find:*)",
+        "Bash(grep:*)",
+        "Bash(cat:*)",
+        "Bash(comm:*)"
+      ]
+    },
+    "ask": {
+      "git_mutations": [
+        "Bash(git push:*)",
+        "Bash(git pull:*)",
+        "Bash(git rebase:*)",
+        "Bash(git reset:*)",
+        "Bash(git branch:*)"
+      ],
+      "package_management": [
+        "Bash(npm install:*)",
+        "Bash(npm ci:*)",
+        "Bash(npm publish:*)",
+        "Bash(npm run migrate:*)",
+        "Bash(npm run seed:*)",
+        "Bash(bun install:*)",
+        "Bash(bun run migrate:*)",
+        "Bash(bun run seed:*)"
+      ],
+      "docker_mutations": [
+        "Bash(docker build:*)",
+        "Bash(docker run:*)",
+        "Bash(docker-compose up:*)",
+        "Bash(docker-compose down:*)"
+      ],
+      "secrets_and_environment": [
+        "Read(.env*)",
+        "Read(convex/.env*)"
+      ]
+    },
+    "deny": {
+      "destructive_git": [
+        "Bash(git checkout .)",
+        "Bash(git clean:*)",
+        "Bash(git branch -D:*)",
+        "Bash(git reset --hard:*)"
+      ],
+      "destructive_files": [
+        "Bash(rm -rf:*)",
+        "Bash(rm -f:*)",
+        "Bash(rm :*)"
+      ],
+      "compilation": [
+        "Bash(cc:*)",
+        "Bash(gcc:*)",
+        "Bash(g++:*)"
+      ],
+      "privilege_escalation": [
+        "Bash(sudo:*)"
+      ],
+      "system_operations": [
+        "Bash(kill:*)",
+        "Bash(killall:*)",
+        "Bash(npx kill-port:*)"
+      ],
+      "secrets_strict": [
+        "Read(.env.local)",
+        "Read(.env.production)"
+      ]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "epic_id": "YYYY-MM_epic-slug",
+  "epic_name": "Epic Name",
+  "features": [
+    {
+      "id": "FEAT-001",
+      "category": "core",
+      "description": "User can [action]. When they [do X], [expected outcome].",
+      "user_value": "Why does the user care about this? What problem does it solve?",
+      "test_steps": [
+        "Navigate to [location]",
+        "Perform action [X]",
+        "Verify that [outcome happens]",
+        "Check that [side effect or state]"
+      ],
+      "dependencies": [],
+      "passes": false,
+      "notes": "Any implementation notes or gotchas"
+    },
+    {
+      "id": "FEAT-002",
+      "category": "core",
+      "description": "User can [another action].",
+      "user_value": "Why does this matter?",
+      "test_steps": [
+        "Step 1",
+        "Step 2",
+        "Step 3"
+      ],
+      "dependencies": ["FEAT-001"],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "FEAT-003",
+      "category": "edge_case",
+      "description": "System handles [error condition] gracefully.",
+      "user_value": "User doesn't get confused or frustrated",
+      "test_steps": [
+        "Trigger error condition [X]",
+        "Verify error message is clear",
+        "Verify user can recover"
+      ],
+      "dependencies": ["FEAT-001"],
+      "passes": false,
+      "notes": ""
+    }
+  ],
+  "categories": {
+    "core": "Essential features for the epic to work",
+    "nice_to_have": "Would be great but not critical",
+    "edge_case": "Error handling and unusual scenarios",
+    "performance": "Speed, efficiency, or optimization"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "epic_id": "2026-01_example-realtime-sync",
+  "epic_name": "Real-time Data Synchronization",
+  "features": [
+    {
+      "id": "FEAT-001",
+      "category": "core",
+      "description": "Client can establish a real-time connection to the server.",
+      "user_value": "Foundation for all real-time features to work",
+      "test_steps": [
+        "Open browser DevTools (Network tab)",
+        "Load the app",
+        "Verify WebSocket connection is established (should see ws:// in Network tab)",
+        "Check that connection stays open for at least 10 seconds",
+        "Refresh page and verify connection re-establishes"
+      ],
+      "dependencies": [],
+      "passes": false,
+      "notes": "Use Convex subscriptions for this. Should be straightforward."
+    },
+    {
+      "id": "FEAT-002",
+      "category": "core",
+      "description": "When one user edits a note, other users see the change within 1 second.",
+      "user_value": "Real-time collaboration becomes possible",
+      "test_steps": [
+        "Open note in Browser A",
+        "Open same note in Browser B (incognito or different browser)",
+        "In Browser A, type a sentence",
+        "In Browser B, verify the text appears within 1 second",
+        "Check that all characters are there (no garbled text)",
+        "In Browser B, type a response",
+        "In Browser A, verify Browser B's text appears",
+        "Verify database has all the content (check Convex dashboard)"
+      ],
+      "dependencies": ["FEAT-001"],
+      "passes": false,
+      "notes": "This is the core of the epic. Use Convex mutations + reactive queries."
+    },
+    {
+      "id": "FEAT-003",
+      "category": "core",
+      "description": "When two users type simultaneously, both edits are preserved (no data loss).",
+      "user_value": "Concurrent editing doesn't cause confusion or lost work",
+      "test_steps": [
+        "Open note in Browser A and Browser B",
+        "Both browsers should show identical content",
+        "In Browser A, position cursor at start, type 'AAA '",
+        "At the same time, in Browser B, position cursor at end, type ' BBB'",
+        "Wait 2 seconds for sync",
+        "Both browsers should show: 'AAA [original content] BBB'",
+        "No characters should be lost or duplicated",
+        "Refresh both browsers and verify content is still correct"
+      ],
+      "dependencies": ["FEAT-002"],
+      "passes": false,
+      "notes": "Hardest feature. Will need CRDT or operational transform logic. Start simple."
+    },
+    {
+      "id": "FEAT-004",
+      "category": "core",
+      "description": "UI shows which user is currently editing (visual indicator).",
+      "user_value": "Users know who else is editing and where",
+      "test_steps": [
+        "Open note in Browser A and Browser B",
+        "In Browser A, start typing",
+        "In Browser B, verify a visual indicator appears showing 'User A is editing'",
+        "In Browser A, stop typing for 5 seconds",
+        "In Browser B, indicator should disappear",
+        "Both users type at same time, both indicators should show"
+      ],
+      "dependencies": ["FEAT-002"],
+      "passes": false,
+      "notes": "Shows presence. Use Convex presence features if available, or track in DB."
+    },
+    {
+      "id": "FEAT-005",
+      "category": "edge_case",
+      "description": "If network drops, user can still edit locally; changes sync when network returns.",
+      "user_value": "Users aren't frustrated by network hiccups",
+      "test_steps": [
+        "Open DevTools, Network tab, throttle to 'Offline'",
+        "Try to edit a note",
+        "App should still be editable (or show clear message that we're offline)",
+        "User can type and see their own changes",
+        "Restore network (throttle back to online)",
+        "Changes should sync to server within 2 seconds",
+        "Refresh page and verify all changes persisted"
+      ],
+      "dependencies": ["FEAT-002"],
+      "passes": false,
+      "notes": "Error handling. Queue local changes and sync when network returns."
+    },
+    {
+      "id": "FEAT-006",
+      "category": "nice_to_have",
+      "description": "Show a timestamp of when the note was last edited.",
+      "user_value": "Users know if the version is fresh",
+      "test_steps": [
+        "Open note",
+        "Verify last-edited timestamp is visible",
+        "Make a change",
+        "Timestamp updates within 2 seconds",
+        "Close and reopen note, timestamp is still there"
+      ],
+      "dependencies": ["FEAT-002"],
+      "passes": false,
+      "notes": "Polish feature. Low priority."
+    }
+  ],
+  "categories": {
+    "core": "Must have for real-time sync to work",
+    "nice_to_have": "Adds polish but not critical",
+    "edge_case": "Handles errors or unusual scenarios",
+    "performance": "Speed or optimization"
+  }
+}

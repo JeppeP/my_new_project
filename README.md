@@ -39,6 +39,10 @@ Open http://localhost:5173
 
 **Full Docker guide:** See `docs/DOCKER.md` for detailed setup, troubleshooting, and best practices.
 
+## Tips for Best Results
+
+**AI-Assisted Development:** If using Claude Code or similar AI tools, use **Claude Opus 4.5** for best results. It's faster and more capable than smaller models, making it more cost-efficient for coding tasks.
+
 ## Tech Stack
 
 - **Frontend:** React + TypeScript + Tailwind CSS + Vite
@@ -117,6 +121,7 @@ See AGENTS.md for detailed workflow.
 - **AGENTS.md** - Master rules and source of truth
 - **CLAUDE.md** - Quick reference
 - **docs/PLAN.md** - Project plan (when ready)
+- **docs/ARCHITECTURE.md** - Technical structure and patterns
 - **docs/DECISIONS.md** - Architecture decisions
 - **docs/FEATURE_SPEC.md** - Feature specifications
 

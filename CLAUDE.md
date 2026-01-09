@@ -41,6 +41,37 @@ docker-compose -f docker-compose.prod.yml up
 
 **Full Docker guide:** See `docs/DOCKER.md` for detailed setup, troubleshooting, and best practices.
 
+---
+
+## Core Workflow Principles
+
+These principles ensure we build great software efficiently. See **AGENTS.md** for full details.
+
+### Before Any Task
+- **Read first** - Always read relevant files before proposing changes
+- **Never speculate** - Don't make claims about code you haven't seen
+- **Plan in plan mode** - For non-trivial tasks, use shift+tab twice
+
+### During Implementation
+- **Simplicity first** - Smallest possible change that works
+  - Touch fewest files
+  - Change fewest lines
+  - No "while we're here" refactors
+- **Check major changes** - Propose plan before implementing significant changes
+- **High-level summaries** - Explain what changed, not just how
+
+### After Each Session
+- **Self-review** - Check code for quality, security, efficiency
+- **Update docs** - Keep ARCHITECTURE.md current with structural changes
+- **Never speculate** - Back up claims with actual code
+
+### Model
+- **Recommended:** Claude Opus 4.5 for everything
+- Run `claude model` to verify
+- It's faster and more cost-efficient than smaller models
+
+---
+
 ### Hard Rules (Do NOT)
 
 - Change the tech stack (React + Vite + Bun + Convex are fixed)
@@ -100,8 +131,21 @@ See `.claude/permissions.json` for detailed command allowlist.
 - **docs/PLAN.md** - Project plan/roadmap
 - **docs/DECISIONS.md** - Architecture decisions
 - **docs/FEATURE_SPEC.md** - Feature specifications
+- **docs/ARCHITECTURE.md** - Technical structure and patterns
 - **.claude/permissions.json** - Safety rules
 - **.claude/PERMISSIONS.md** - Why each rule exists
+
+---
+
+## Advanced Workflows
+
+For maximum productivity, you can run multiple Claude Code sessions in parallel (inspired by Boris Churney's workflow):
+
+- **Terminal Sessions (5+):** Use a terminal wrapper like Ghosty to split terminals. Run multiple Claude Code instances, each on a different task.
+- **Web Agents (5-10):** Use claude.ai Claude Code section to spin up agents that work on tasks while you're away (perfect before bed or when at the gym).
+- **Result:** Always building. Your app improves even when you're not working.
+
+See Boris Churney's workflow thread for more details on scaling your development process.
 
 ---
 

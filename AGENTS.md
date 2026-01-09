@@ -157,12 +157,29 @@ Every feature must include:
 
 When implementing a feature, follow these steps:
 
+### Before You Code
 1. **Read this file** (AGENTS.md)
-2. **Identify relevant files** and list them
-3. **Propose a short plan** (3–8 bullets)
-4. **Execute with small diffs** - minimal, incremental changes
-5. **Run checks** - propose exact commands
-6. **Summarize** - changes + what to test
+2. **Read relevant files** - Always read files before proposing changes. Never speculate about code you haven't seen.
+3. **Identify relevant files** and list them
+4. **Propose a short plan** (3–8 bullets)
+   - For non-trivial tasks: Use plan mode (shift+tab twice)
+   - Go back and forth to refine plan
+
+### During Implementation
+5. **Execute with minimal diffs** - Smallest possible working change
+   - Touch fewest files possible
+   - Change fewest lines possible
+   - No "while we're here" refactors
+   - No unnecessary abstractions
+6. **Run checks** - Use `/verify` for lint/typecheck/tests
+7. **Self-review** - Review code for quality, security, efficiency
+   - Is the code simple and readable?
+   - Any security concerns (OWASP top 10)?
+   - Any performance issues?
+   - Documentation updated if structure changed?
+
+### After Implementation
+8. **Summarize** - High-level explanation of changes + what to test
 
 ### Output Format
 - Plan (bullets)

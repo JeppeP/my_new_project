@@ -9,24 +9,26 @@ This file defines which Bash commands AI agents are allowed to execute in this r
 These commands run automatically and are safe for the agent to execute without user intervention.
 
 #### Testing & Validation
-- `npm run test:*` - Run tests (essential for verification)
-- `npm run typecheck:*` - Type checking (find bugs early)
-- `npm run lint:*` - Linting (code quality checks)
-- `npm run lint:fix:*` - Auto-fix linting issues
-- `bun run test:*` - Bun test runner
-- `bun run typecheck:*` - Bun type checking
-- `bun run lint:*` - Bun linting
+- `bun run test:*` - Bun test runner (essential for verification)
+- `bun run typecheck:*` - Bun type checking (find bugs early)
+- `bun run lint:*` - Bun linting (code quality checks)
 - `bun run lint:fix:*` - Bun auto-fix linting
+- `npm run test:*` - npm test runner (fallback for compatibility)
+- `npm run typecheck:*` - npm type checking (fallback)
+- `npm run lint:*` - npm linting (fallback)
+- `npm run lint:fix:*` - npm auto-fix (fallback)
 
 #### Building
-- `npm run build:*` - Build the project (safe, creates artifacts)
-- `npm run format:*` - Format code (prettier/beautifier)
-- `bun run build:*` - Bun build runner
-- `bun run format:*` - Bun formatting
+- `bun run build:*` - Bun build runner (safe, creates artifacts)
+- `bun run format:*` - Bun formatting (code beautifier)
+- `bun run preview:*` - Preview production build locally (safe, read-only)
+- `npm run build:*` - npm build (fallback for compatibility)
+- `npm run format:*` - npm format (fallback for compatibility)
 
 #### Development
-- `npm run dev:*` - Run dev server (local only, safe)
-- `bun run dev:*` - Bun dev server
+- `bun run dev:*` - Bun dev server (local only, safe)
+- `bunx convex dev:*` - Convex backend (required for development)
+- `npm run dev:*` - npm dev server (fallback for compatibility)
 - `./scripts/:*` - Project-specific scripts
 
 #### Git (Safe, Read-Only)
@@ -39,12 +41,14 @@ These commands run automatically and are safe for the agent to execute without u
 #### Docker (Inspection Only)
 - `docker ps:*` - List running containers (read-only)
 - `docker logs:*` - View container logs (read-only)
+- `docker-compose logs:*` - View docker-compose service logs (read-only)
 
 #### File Operations
 - `find:*` - Search for files (read-only)
 - `grep:*` - Search file contents (read-only)
 - `cat:*` - Display file contents (read-only)
 - `comm:*` - Compare files (read-only)
+- `lsof:*` - List open files (troubleshooting port conflicts, read-only)
 
 ---
 
@@ -60,20 +64,23 @@ These commands need user confirmation because they make changes to the repositor
 - `git branch:*` - Create/delete branches
 
 #### Package Management
-- `npm install:*` - Install/update dependencies (modifies package.json)
-- `npm ci:*` - Clean install (modifies node_modules)
+- `bun install:*` - Bun package installation (modifies dependencies)
+- `bun run migrate:*` - Bun database migrations (modifies data)
+- `bun run seed:*` - Bun database seeding (modifies data)
+- `npm install:*` - npm installation (fallback, modifies package.json)
+- `npm ci:*` - npm clean install (fallback, modifies node_modules)
 - `npm publish:*` - Publish to npm registry (public action)
-- `npm run migrate:*` - Database migrations (modifies data)
-- `npm run seed:*` - Database seeding (modifies data)
-- `bun install:*` - Bun package installation
-- `bun run migrate:*` - Bun migrations
-- `bun run seed:*` - Bun database seeding
+- `npm run migrate:*` - npm migrations (fallback)
+- `npm run seed:*` - npm seeding (fallback)
 
 #### Docker (Mutations)
 - `docker build:*` - Build Docker image (time-consuming, resource-heavy)
 - `docker run:*` - Run Docker container (starts processes)
-- `docker-compose up:*` - Start docker-compose services (complex)
+- `docker-compose up:*` - Start docker-compose services (complex state change)
 - `docker-compose down:*` - Stop docker-compose services (stops running services)
+- `docker-compose build:*` - Build docker-compose images (resource-heavy)
+- `docker-compose exec:*` - Execute command in running container (arbitrary execution)
+- `docker-compose restart:*` - Restart docker-compose services (service mutation)
 
 #### Secrets & Environment
 - `Read(.env*)` - Read environment variables (may contain secrets)
@@ -174,16 +181,20 @@ Then commit `.claude/permissions.json` to git.
 
 ### Running Tests
 All test commands are ALLOW:
-- `npm run test` - ✅ Auto-runs
-- `bun run test` - ✅ Auto-runs
+- `bun run test` - ✅ Auto-runs (primary)
+- `npm run test` - ✅ Auto-runs (compatibility)
 - Agent can verify changes instantly
 
 ### Code Quality
 All quality checks are ALLOW:
-- `npm run lint` - ✅ Auto-runs
-- `npm run typecheck` - ✅ Auto-runs
-- `npm run format` - ✅ Auto-runs
+- `bun run lint` - ✅ Auto-runs
+- `bun run typecheck` - ✅ Auto-runs
+- `bun run format` - ✅ Auto-runs
 - Agent ensures code quality automatically
+
+### Convex Backend
+- `bunx convex dev` - ✅ Auto-runs (required for development)
+- Starts the Convex backend for realtime database access
 
 ### Git Workflow
 Safe git operations are ALLOW, mutations are ASK:
@@ -196,8 +207,12 @@ Safe git operations are ALLOW, mutations are ASK:
 Inspection is ALLOW, changes are ASK:
 - `docker ps` - ✅ Auto-runs (status check)
 - `docker logs` - ✅ Auto-runs (debugging)
+- `docker-compose logs` - ✅ Auto-runs (view service logs)
+- `lsof -i :5173` - ✅ Auto-runs (troubleshoot port conflicts)
 - `docker build` - ❓ Requires confirmation (resource-heavy)
 - `docker run` - ❓ Requires confirmation (starts services)
+- `docker-compose up` - ❓ Requires confirmation (complex state change)
+- `docker-compose exec` - ❓ Requires confirmation (arbitrary execution)
 
 ---
 

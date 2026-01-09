@@ -15,11 +15,13 @@
         "Bash(npm run build:*)",
         "Bash(npm run format:*)",
         "Bash(bun run build:*)",
-        "Bash(bun run format:*)"
+        "Bash(bun run format:*)",
+        "Bash(bun run preview:*)"
       ],
       "development": [
         "Bash(npm run dev:*)",
         "Bash(bun run dev:*)",
+        "Bash(bunx convex dev:*)",
         "Bash(./scripts/:*)"
       ],
       "git_safe": [
@@ -31,13 +33,15 @@
       ],
       "docker_inspect": [
         "Bash(docker ps:*)",
-        "Bash(docker logs:*)"
+        "Bash(docker logs:*)",
+        "Bash(docker-compose logs:*)"
       ],
       "file_operations": [
         "Bash(find:*)",
         "Bash(grep:*)",
         "Bash(cat:*)",
-        "Bash(comm:*)"
+        "Bash(comm:*)",
+        "Bash(lsof:*)"
       ]
     },
     "ask": {
@@ -62,7 +66,10 @@
         "Bash(docker build:*)",
         "Bash(docker run:*)",
         "Bash(docker-compose up:*)",
-        "Bash(docker-compose down:*)"
+        "Bash(docker-compose down:*)",
+        "Bash(docker-compose build:*)",
+        "Bash(docker-compose exec:*)",
+        "Bash(docker-compose restart:*)"
       ],
       "secrets_and_environment": [
         "Read(.env*)",

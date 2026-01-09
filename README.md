@@ -17,6 +17,28 @@ bun run dev
 
 Open http://localhost:5173
 
+## Quick Start (with Docker)
+
+For project isolation and consistency across team members, use Docker:
+
+```bash
+# 1. Copy environment template
+cp .env.example .env.local
+
+# 2. Initialize Convex and update .env.local with values
+bunx convex dev
+
+# 3. Terminal 1: Start Convex backend (on host machine)
+bunx convex dev
+
+# 4. Terminal 2: Start Docker frontend
+docker-compose up
+```
+
+Open http://localhost:5173
+
+**Full Docker guide:** See `docs/DOCKER.md` for detailed setup, troubleshooting, and best practices.
+
 ## Tech Stack
 
 - **Frontend:** React + TypeScript + Tailwind CSS + Vite

@@ -19,6 +19,28 @@ bun run lint      # Check code quality
 bun run test      # Run tests
 ```
 
+### Docker Commands
+
+```bash
+# Development (with Docker)
+docker-compose up          # Start frontend in Docker
+bunx convex dev            # Start Convex backend (separate terminal)
+
+# Stop containers
+docker-compose down
+
+# Rebuild after dependency changes
+docker-compose build --no-cache
+
+# View logs
+docker-compose logs -f frontend
+
+# Production preview
+docker-compose -f docker-compose.prod.yml up
+```
+
+**Full Docker guide:** See `docs/DOCKER.md` for detailed setup, troubleshooting, and best practices.
+
 ### Hard Rules (Do NOT)
 
 - Change the tech stack (React + Vite + Bun + Convex are fixed)

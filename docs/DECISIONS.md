@@ -136,6 +136,43 @@ Hard rule: do not add libraries without explicit approval.
 
 ---
 
+## Decision 7: Docker for Development
+
+**Context:**
+How do we ensure consistent development environments across team members and support working with multiple projects simultaneously?
+
+**Decision:**
+Containerize the frontend (Vite dev server) with Docker. Keep Convex CLI running on the host machine (it's a cloud service).
+
+**Rationale:**
+- **Project isolation:** Each project runs in its own container, preventing dependency conflicts
+- **Clean development machine:** No global npm/node installs; dependencies live in containers
+- **Team consistency:** All developers work in identical environments (same Node version, packages, etc.)
+- **Multi-project friendly:** Switch between projects without uninstalling/reinstalling dependencies
+- **Convex stays on host:** Simpler authentication flow, cleaner developer experience
+
+**Alternatives Considered:**
+- **No Docker:** Simpler setup but causes "works on my machine" problems with multiple projects
+- **Full containerization:** Docker for Convex too, but adds unnecessary network complexity since Convex is cloud-hosted
+- **Containers for deployment only:** Misses benefits of consistency during development
+
+**Consequences:**
+- Docker knowledge required (minor learning curve)
+- ~5-10% performance overhead vs. native (acceptable trade-off)
+- Hot Module Reload (HMR) requires polling-based file watching (~1-2s latency, imperceptible to users)
+- Two terminals required: one for Convex, one for Docker frontend
+- Docker is optional—developers can still use `bun run dev` natively if preferred
+
+**Configuration:**
+- `Dockerfile` - Multi-stage build (dev, build, production)
+- `docker-compose.yml` - Development orchestration
+- `docker-compose.prod.yml` - Production preview
+- `vite.config.ts` - Docker-compatible HMR settings
+
+**Status:** Decided
+
+---
+
 ## Template
 
 ### Decision N: [Title]

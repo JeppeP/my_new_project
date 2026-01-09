@@ -1,0 +1,60 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Dependencies (rebuilt in container)
+node_modules
+*.pnp
+*.pnp.js
+
+# Build artifacts
+dist
+build
+.next
+out
+coverage
+
+# Environment files (secrets)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Convex
+.convex
+convex/.env*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Misc
+.cache
+.parcel-cache
+dist-ssr
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Documentation (not needed in container)
+*.md
+docs
+
+# Tasks and planning
+tasks

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: project-frontend-prod
+    ports:
+      - "3000:3000"
+    environment:
+      # Pass Convex environment variables from host .env.local
+      - VITE_CONVEX_URL=${VITE_CONVEX_URL}
+      - VITE_CONVEX_DEPLOYMENT=${VITE_CONVEX_DEPLOYMENT}

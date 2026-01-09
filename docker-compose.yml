@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: project-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      # Bind mount for live code editing
+      - .:/app
+      # Named volume for node_modules to prevent conflicts
+      - node_modules:/app/node_modules
+    environment:
+      # Pass Convex environment variables from host .env.local
+      - VITE_CONVEX_URL=${VITE_CONVEX_URL}
+      - VITE_CONVEX_DEPLOYMENT=${VITE_CONVEX_DEPLOYMENT}
+    stdin_open: true
+    tty: true
+
+volumes:
+  node_modules:
+    driver: local
